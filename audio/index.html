@@ -1,16 +1,142 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Audio Player</title>
+<meta charset="UTF-8">
+<title>Premium Audio Player</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(270deg, #ff6ec4, #7873f5, #4facfe);
+    background-size: 600% 600%;
+    animation: gradientMove 12s ease infinite;
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .player {
+    width: 340px;
+    padding: 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    text-align: center;
+    color: white;
+  }
+
+  .cover {
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    margin: 0 auto 15px;
+    background: url('https://picsum.photos/300') center/cover;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  }
+
+  h2 {
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 13px;
+    opacity: 0.8;
+    margin-bottom: 20px;
+  }
+
+  audio {
+    width: 100%;
+    margin-bottom: 15px;
+    filter: invert(1);
+  }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    background: rgba(255,255,255,0.4);
+    transform: scale(1.1);
+  }
+
+  .btn i {
+    font-size: 18px;
+  }
+
+</style>
 </head>
+
 <body>
 
-<h2>My Audio</h2>
+<div class="player">
 
-<audio controls>
-  <source src="sample.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+  <div class="cover"></div>
+
+  <h2>My Track</h2>
+  <p>Artist Name</p>
+
+  <audio id="audio" controls>
+    <source src="sample.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="controls">
+    <div class="btn" onclick="rewind()">⏪</div>
+    <div class="btn" onclick="togglePlay()">▶️</div>
+    <div class="btn" onclick="forward()">⏩</div>
+  </div>
+
+</div>
+
+<script>
+  const audio = document.getElementById('audio');
+
+  function togglePlay() {
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  }
+
+  function rewind() {
+    audio.currentTime -= 10;
+  }
+
+  function forward() {
+    audio.currentTime += 10;
+  }
+</script>
 
 </body>
 </html>
